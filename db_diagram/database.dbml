@@ -1,0 +1,105 @@
+Project Event5_db {
+  database_type: 'PostgreSQL'
+  note: '''
+  # Event5 DataBase Diagram
+  **Event5 is a project created at Platzi Master, to 
+  create, organize and promote events.**
+  '''
+}
+
+enum user_type {
+  admin
+  organizer
+}
+
+Table user {
+  id int [pk, increment]
+  username varchar(30) [not null, unique]
+  password varchar(100) [not null]
+  type user_type [not null]
+  email varchar(150) [not null, unique]
+
+  note: "table 'user' contains user information"
+}
+
+Table event {
+  id int [pk, increment]
+  name varchar
+  url varchar
+  day timestamp
+  template varchar
+  user_id int [ref: > user.id]
+  
+  note: "table 'event' contains principal informaion of a event"
+}
+
+Table event_data {
+  id int [pk, increment]
+  day varchar
+  logo_url varchar
+  name varchar
+  background_url varchar
+  title varchar
+  countdown timestamp
+  description varchar
+  event_image_url varchar
+  event_id int [ref: - event.id]
+  
+  note: "table 'event_data' contains especific information of a event"
+}
+
+Table schedule {
+  id int [pk, increment]
+  title varchar
+  description varchar
+  speaker varchar
+  date_time timestamp
+  event_id int [ref: > event.id]
+
+  note: "table 'schedule' contains the specific schedule of an event"
+}
+
+Table schedule_speaker{
+  id int [pk, increment]
+  speaker_id int [ref: > speaker.id]
+  schedule_id  int [ref: > schedule.id]
+} 
+
+Table speaker {
+  id int [pk, increment]
+  name varchar
+  biography varchar
+  role varchar
+  twitter varchar
+  photo_url varchar
+
+  note: "table 'speaker' contains speaker especific information"
+}
+
+Table event_registry {
+  id int [pk, increment]
+  event_id int [ref: > event.id]
+  registry_id int [ref: > registry.id]
+}
+
+Table registry {
+  id int [pk, increment]
+  email varchar
+  
+  note: "table 'registry' contains registered email"
+}
+
+Table event_associate {
+  id int [pk, increment]
+  event_id int [ref: > event.id]
+  associates_id int [ref: > associate.id]
+}
+
+Table associate {
+  id int [pk, increment]
+  name varchar
+  url varchar
+  logo_url varchar
+  
+  note: "table 'associates' contains information about an associate"
+}
