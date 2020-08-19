@@ -22,8 +22,11 @@ const usersMock = [
   },
 ];
 
-function getUser(id) {
-  return usersMock.filter((user) => user.id === id);
+function getUser(email) {
+  const user = usersMock.filter((user) => user.email === email);
+  if (!user) throw new Error('No EMAIL!!');
+
+  return user;
 }
 
 function getUsers() {
@@ -33,4 +36,12 @@ function getUsers() {
 function createUser(user) {
   user.id = usersMock.length + 1;
   return usersMock.push(user);
+}
+
+// console.log(`getUser__ ${getUser('luis@gmail.com')}`);
+
+module.exports = {
+  getUser,
+  getUsers,
+  createUser
 }
