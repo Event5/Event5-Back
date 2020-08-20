@@ -26,8 +26,6 @@ app.use(logErrors);
 app.use(wrapErrors);
 app.use(errorHandler);
 
-// TODO add Error Handlers
-
 app.listen(config.port, () => {
   console.log(`Listening at http://localhost:${config.port}`);
 });

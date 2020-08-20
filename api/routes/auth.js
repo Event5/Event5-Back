@@ -15,15 +15,17 @@ function authApi(app) {
   const router = express.Router();
   app.use('/api/auth', router);
 
+  // User logic
   const usersService = new UsersService();
 
+  // sing-in route
   router.post('/sign-in', async function (req, res, next) {
     passport.authenticate('basic', function (error, user) {
       try {
         if (error || !user) {
           next(boom.unauthorized());
         }
-
+        // Request login
         req.login(user, { session: false }, async function (error) {
           if (error) {
             next(error);
@@ -37,11 +39,11 @@ function authApi(app) {
             email,
             type,
           };
-
+          // Create json web token with the payload data
           const token = jwt.sign(payload, config.auth_jwt_secret, {
-            expiresIn: '15m',
+            expiresIn: '24h',
           });
-
+          // Response
           return res.status(200).json({ token, user: { id, username, email } });
         });
       } catch (error) {
@@ -50,18 +52,26 @@ function authApi(app) {
     })(req, res, next);
   });
 
-  // TODO sign-up
-  
-  // router.post('/sign-up', validationHandler(createUserSchema), async function(req, res, next) {
-  //   const { body: user } = req;
+  // sign-up route
+  router.post('/sign-up', validationHandler(createUserSchema), async function (
+    req,
+    res,
+    next
+  ) {
+    const { body: user } = req;
 
-  //   try {
-  //     const createdUserId = await usersService.createUser({ user });
-  //     res.status(201)
-  //   } catch(error) {
-
-  //   }
-  // })
+    try {
+      // Store user in the DB and return user id
+      const createdUserId = await usersService.createUser(user);
+      // Response
+      res.status(201).json({
+        data: createdUserId,
+        message: 'user created',
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 }
 
 module.exports = authApi;

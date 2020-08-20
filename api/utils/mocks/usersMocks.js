@@ -7,10 +7,10 @@ const usersMock = [
     type: 'admin',
   },
   {
-    id: 2,
+    id: 1,
     username: 'Luis',
     email: 'luis@gmail.com',
-    password: 'luis123',
+    password: '$2b$05$q9Fu3TgU6locFXjoAPrtt.ueAvfDpi0pHjxi12DKOgk0bf7SrOHMi',
     type: 'admin',
   },
   {
@@ -23,8 +23,10 @@ const usersMock = [
 ];
 
 function getUser(email) {
-  const user = usersMock.filter((user) => user.email === email);
-  if (!user) throw new Error('No EMAIL!!');
+  const user = usersMock.find((user) => user.email === email);
+  if (!user) {
+    console.log('No user!!!!!!!');
+  }
 
   return user;
 }
@@ -43,5 +45,5 @@ function createUser(user) {
 module.exports = {
   getUser,
   getUsers,
-  createUser
-}
+  createUser,
+};

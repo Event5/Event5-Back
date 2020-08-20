@@ -2,12 +2,13 @@ const joi = require('joi');
 
 const userIdSchema = joi.number();
 
-const createUserSchema = {
-  username: joi.string().max(100).required(),
-  email: joi.string().email().required(),
-  password: joi.string().required,
-  isAdmin: joi.boolean(),
-};
+// Schema to validate the data received of the user
+const createUserSchema = joi.object({
+  username: joi.string().alphanum().min(3).max(30).required(),
+  email: joi.string().email({ minDomainSegments: 2 }),
+  password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+  type: joi.string().pattern(new RegExp('admin|organizer')),
+});
 
 module.exports = {
   userIdSchema,
