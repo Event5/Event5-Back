@@ -11,6 +11,7 @@ const scheduleApi = require('./routes/schedule');
 const speakerApi = require('./routes/speaker');
 const registryApi = require('./routes/registry');
 const associateApi = require('./routes/associate');
+const emailApi = require('./routes/email');
 
 const {
   logErrors,
@@ -33,6 +34,7 @@ scheduleApi(app);
 speakerApi(app);
 associateApi(app);
 registryApi(app);
+emailApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
