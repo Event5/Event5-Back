@@ -6,7 +6,7 @@ const createEventSchema = joi.object({
   url: joi.string().uri().required(),
   day: joi.date().timestamp().required(),
   template: joi.string().required(),
-  user_id: joi.number(),
+  organization_id: joi.number(),
 });
 
 module.exports = {

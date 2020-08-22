@@ -8,15 +8,3 @@ exports.scheduleMock = [
     event_id: 1,
   },
 ];
-
-// function createSchedule(schedule) {
-//   const newSchedule = Object.assign({ id: scheduleMock.length + 1 }, schedule);
-
-//   scheduleMock.push(newSchedule);
-//   const scheduleCreated = scheduleMock.find((val) => val.id === newSchedule.id);
-//   return scheduleCreated;
-// }
-
-// module.exports = {
-//   scheduleMock,
-// };

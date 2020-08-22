@@ -8,7 +8,6 @@ class EventService {
 
   async createEvent(event) {
     const createEvent = await this.crudMock.create(event, eventMock);
-    // console.log(createEvent);
     return createEvent;
   }
 }
