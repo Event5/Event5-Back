@@ -2,11 +2,11 @@ const express = require('express');
 const passport = require('passport');
 const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
-const UsersService = require('../services/users');
+const UsersService = require('../services/user');
 const validationHandler = require('../utils/middleware/validationHandler');
 const config = require('../config/config');
 
-const { createUserSchema } = require('../utils/schemas/users');
+const { createUserSchema } = require('../utils/schemas/user');
 
 // Basic strategy
 require('../utils/auth/strategies/basic');

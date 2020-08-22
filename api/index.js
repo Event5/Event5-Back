@@ -3,6 +3,9 @@ const app = express();
 
 const config = require('./config/config');
 const authApi = require('./routes/auth');
+const eventApi = require('./routes/event');
+const eventDataApi = require('./routes/eventData');
+const scheduleApi = require('./routes/schedule');
 
 const {
   logErrors,
@@ -17,6 +20,9 @@ app.use(express.json());
 
 // routes
 authApi(app);
+eventApi(app);
+eventDataApi(app);
+scheduleApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
