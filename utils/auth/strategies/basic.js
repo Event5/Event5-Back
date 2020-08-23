@@ -19,10 +19,6 @@ passport.use(
         return cb(boom.unauthorized(), false);
       }
 
-      // TODO remove when signup is working.
-      // const passHashed = await bcrypt.hashSync(user.password, 5);
-      // console.log('Hash__ ' + passHashed);
-
       // Check if passed password matches the password that is stored in the DB.
       if (!(await bcrypt.compare(password, user.password))) {
         return cb(boom.unauthorized(), false);

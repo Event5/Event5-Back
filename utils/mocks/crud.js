@@ -1,10 +1,6 @@
 class CrudMock {
   getUser(email, mock) {
     const user = mock.find((user) => user.email === email);
-    if (!user) {
-      console.log('No user!!!!!!!');
-    }
-
     return user;
   }
 
