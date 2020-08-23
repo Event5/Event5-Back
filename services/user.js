@@ -1,35 +1,35 @@
 const bcrypt = require('bcrypt');
-const { userMock } = require('../utils/mocks/userMock');
-const CrudMock = require('../utils/mocks/crud');
+const RemoteStore = require('../lib/remoteStore');
 
 class UsersService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new RemoteStore('https://event5api.herokuapp.com');
+    this.table = 'user';
   }
 
-  // Get that matches the email passed.
+  // Get the user that matches the passed email.
   async getUser(email) {
-    const user = await this.crudMock.getUser(email, userMock);
+    const emailReq = `?email=${email}`;
+    const user = await this.remoteStore.get(this.table, emailReq);
     return user;
   }
 
   // Create new User.
   async createUser(user) {
     try {
-      const { username, email, password, type } = user;
+      const { username, email, password, type_user, user_status } = user;
 
       // hash the password to be secure
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const createdUser = await this.crudMock.create(
-        {
-          username,
-          email,
-          password: hashedPassword,
-          type,
-        },
-        userMock
-      );
+      // Communicate with the Data service to store the user
+      const createdUser = await this.remoteStore.create(this.table, {
+        username,
+        email,
+        password: hashedPassword,
+        type_user,
+        user_status,
+      });
 
       return createdUser;
     } catch (error) {
