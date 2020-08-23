@@ -62,10 +62,10 @@ function authApi(app) {
 
     try {
       // Store user in the DB and return user id
-      const createdUserId = await usersService.createUser(user);
+      const createdUser = await usersService.createUser(user);
       // Response
-      res.status(201).json({
-        data: createdUserId,
+      await res.status(201).json({
+        data: createdUser,
         message: 'user created',
       });
     } catch (error) {
