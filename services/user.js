@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const RemoteStore = require('../lib/remoteStore');
 
-class UsersService {
+class UserService {
   constructor() {
     this.remoteStore = new RemoteStore('https://event5api.herokuapp.com');
     this.table = 'user';
@@ -9,9 +9,15 @@ class UsersService {
 
   // Get the user that matches the passed email.
   async getUser(email) {
-    const emailReq = `?email=${email}`;
-    const user = await this.remoteStore.get(this.table, emailReq);
-    return user;
+    console.log('SI ENTROOOOO');
+    // const emailReq = `?email=${email}`;
+    try {
+      const user = await this.remoteStore.get(this.table, email);
+      return user;
+    } catch (error) {
+      console.log('getUser Error');
+      throw new Error(error);
+    }
   }
 
   // Create new User.
@@ -38,4 +44,4 @@ class UsersService {
   }
 }
 
-module.exports = UsersService;
+module.exports = UserService;
