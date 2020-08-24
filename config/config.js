@@ -14,6 +14,7 @@ const config = {
     api_key: process.env.API_KEY,
   },
   sendgrid_api_key: process.env.SENDGRID_API_KEY,
+  url_data: process.env.URL_DATA,
 };
 
 module.exports = config;
