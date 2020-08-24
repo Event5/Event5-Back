@@ -21,8 +21,8 @@ class UserService {
   // Create new User.
   async createUser(user) {
     try {
+      user.user_status = 'active';
       const { username, email, password, type_user, user_status } = user;
-
       // hash the password to be secure
       const hashedPassword = await bcrypt.hash(password, 10);
 

@@ -5,7 +5,8 @@ const createEventSchema = joi.object({
   name: joi.string().min(3).max(100).required(),
   url: joi.string().uri().required(),
   day: joi.date().timestamp().required(),
-  template: joi.string().required(),
+  template: joi.number().required(),
+  user_id: joi.number(),
   organization_id: joi.number(),
 });
 

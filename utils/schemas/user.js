@@ -8,7 +8,6 @@ const createUserSchema = joi.object({
   email: joi.string().email({ minDomainSegments: 2 }).required(),
   password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
   type_user: joi.string().pattern(new RegExp('admin|organizer')).required(),
-  user_status: joi.string().pattern(new RegExp('active|disabled')).required(),
 });
 
 module.exports = {
