@@ -4,7 +4,7 @@ const joi = require('joi');
 const createAssociateSchema = joi.object({
   name: joi.string().min(3).max(100).required(),
   url: joi.string().uri(),
-  logo_url: joi.string().uri(),
+  logo_url: joi.any(),
   relevance: joi.boolean(),
   event_id: joi.number().required(),
 });

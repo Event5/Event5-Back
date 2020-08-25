@@ -4,7 +4,7 @@ const joi = require('joi');
 const createEmailSchema = joi.object({
   subject: joi.string().required(),
   content: joi.string(),
-  image_url: joi.string().uri(),
+  image_url: joi.any(),
 });
 
 module.exports = {

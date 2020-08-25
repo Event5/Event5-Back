@@ -6,7 +6,7 @@ const createSpeakerSchema = joi.object({
   biography: joi.string(),
   role: joi.string(),
   twitter: joi.string(),
-  photo_url: joi.string().uri(),
+  photo_url: joi.any(),
   schedule_id: joi.number(),
 });
 
