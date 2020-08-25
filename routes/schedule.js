@@ -1,7 +1,11 @@
 const express = require('express');
+const passport = require('passport');
 const ScheduleService = require('../services/schedule');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createScheduleSchema } = require('../utils/schemas/schedule');
+const adminValidationHandler = require('../utils/middleware/adminValidationHandler');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function scheduleApi(app) {
   const router = express.Router();
@@ -11,6 +15,8 @@ function scheduleApi(app) {
 
   router.post(
     '/schedule',
+    passport.authenticate('jwt', { session: false }),
+    adminValidationHandler(),
     validationHandler(createScheduleSchema),
     async function (req, res, next) {
       const { body: schedule } = req;

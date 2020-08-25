@@ -1,7 +1,11 @@
 const express = require('express');
+const passport = require('passport');
 const SpeakerService = require('../services/speaker');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createSpeakerSchema } = require('../utils/schemas/speaker');
+const adminValidationHandler = require('../utils/middleware/adminValidationHandler');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function speakerApi(app) {
   const router = express.Router();
@@ -11,6 +15,8 @@ function speakerApi(app) {
 
   router.post(
     '/speaker',
+    passport.authenticate('jwt', { session: false }),
+    adminValidationHandler(),
     validationHandler(createSpeakerSchema),
     async function (req, res, next) {
       const { body: speaker } = req;

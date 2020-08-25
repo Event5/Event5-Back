@@ -1,7 +1,11 @@
 const express = require('express');
 const OrganizerService = require('../services/organizer');
-// const validationHandler = require('../utils/middleware/validationHandler');
-// const { createOrganizerSchema } = require('../utils/schemas/organizer');
+const passport = require('passport');
+const validationHandler = require('../utils/middleware/validationHandler');
+const { createOrganizerSchema } = require('../utils/schemas/organizer');
+const adminValidationHandler = require('../utils/middleware/adminValidationHandler');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function organizerApi(app) {
   const router = express.Router();
@@ -9,14 +13,17 @@ function organizerApi(app) {
 
   const organizerService = new OrganizerService();
 
-  router.get(
+  router.post(
     '/organizer',
+    passport.authenticate('jwt', { session: false }),
+    adminValidationHandler(),
+    validationHandler(createOrganizerSchema),
     async function (req, res, next) {
-      // const { body: organizer } = req;
+      const { body: organizer } = req;
 
       try {
         // Store organizer in the DB and return it
-        const createdOrganizer = await organizerService.getOrganizer(req.query.email);
+        const createdOrganizer = await organizerService.getOrganizer(organizer);
         // Response
         res.status(201).json({
           data: createdOrganizer,

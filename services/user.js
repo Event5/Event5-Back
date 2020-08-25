@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const RemoteStore = require('../lib/remoteStore');
 const config = require('../config/config');
+// const boom = require('@hapi/boom');
 
 class UserService {
   constructor() {
@@ -12,6 +13,7 @@ class UserService {
   async getUser(email) {
     try {
       const user = await this.remoteStore.get(this.table, email);
+
       return user;
     } catch (error) {
       throw new Error(error);
@@ -23,6 +25,7 @@ class UserService {
     try {
       user.user_status = 'active';
       const { username, email, password, type_user, user_status } = user;
+
       // hash the password to be secure
       const hashedPassword = await bcrypt.hash(password, 10);
 

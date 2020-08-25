@@ -2,8 +2,8 @@ const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const boom = require('@hapi/boom');
 
-const UsersServices = require('../../../services/user');
-const { config } = require('../../../config/config');
+const UserServices = require('../../../services/user');
+const config = require('../../../config/config');
 
 passport.use(
   new Strategy(
@@ -12,10 +12,10 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
     async function (tokenPayload, cb) {
-      const usersService = new UsersService();
+      const usersService = new UserServices();
 
       try {
-        const user = await usersService.getUser({ email: tokenPayload.email });
+        const user = await usersService.getUser(tokenPayload.email);
 
         if (!user) {
           return cb(boom.unauthorized(), false);
@@ -23,7 +23,7 @@ passport.use(
 
         delete user.password;
 
-        cb(null, { ...user, scopes: tokenPayload.scopes });
+        cb(null, { ...user});
       } catch (error) {
         return cb(error);
       }

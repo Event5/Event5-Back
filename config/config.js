@@ -9,12 +9,12 @@ const config = {
   default_organizer_password: process.env.DEFAULT_ORGANIZER_PASSWORD,
   public_api_key_token: process.env.PUBLIC_API_KEY_TOKEN,
   admin_api_key_token: process.env.ADMIN_API_KEY_TOKEN,
-  mailgun: {
-    domain: process.env.DOMAIN,
-    api_key: process.env.API_KEY,
-  },
   sendgrid_api_key: process.env.SENDGRID_API_KEY,
   url_data: process.env.URL_DATA,
+  azure_storage: {
+    account: process.env.ACCOUNT,
+    accountKey: process.env.ACCOUNTKEY,
+  },
 };
 
 module.exports = config;
