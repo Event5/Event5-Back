@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=app:* nodemon index.js",
-    "start": "NODE_ENV=production node index.js",
-    "test": "mocha --exit"
+    "start": "NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "Jose Luis Chavez <josephsiul15@gmai.com>",
