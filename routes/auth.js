@@ -31,19 +31,20 @@ function authApi(app) {
             next(error);
           }
 
-          const { id, username, email } = user;
+          const { id, username, email, type_user } = user;
 
           const payload = {
             id,
             username,
             email,
+            type_user,
           };
           // Create json web token with the payload data
           const token = jwt.sign(payload, config.auth_jwt_secret, {
             expiresIn: '24h',
           });
           // Response
-          return res.status(200).json({ token, user: { id, username, email } });
+          return res.status(200).json({ token, user: { id, username, email, type_user } });
         });
       } catch (error) {
         next(error);
