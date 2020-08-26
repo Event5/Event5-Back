@@ -38,6 +38,10 @@ class UserService {
         user_status,
       });
 
+      if (createdUser.password) delete createdUser.password;
+      if (createdUser.date_create) delete createdUser.date_create;
+      if (createdUser.user_status) delete createdUser.user_status;
+
       return createdUser;
     } catch (error) {
       throw new Error(error);

@@ -5,6 +5,7 @@ const createEmailSchema = joi.object({
   subject: joi.string().required(),
   content: joi.string(),
   image_url: joi.any(),
+  event_id: joi.number(),
 });
 
 module.exports = {

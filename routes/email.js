@@ -5,7 +5,7 @@ const upload = multer({ dest: 'uploads/' });
 const EmailService = require('../services/email');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createEmailSchema } = require('../utils/schemas/email');
-// const uploadImage = require('../lib/cloudinary');
+const uploadImage = require('../lib/cloudinary');
 
 // JWT Strategy
 require('../utils/auth/strategies/jwt');
@@ -19,12 +19,16 @@ function emailApi(app) {
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
-    upload.single('logo_url'),
+    upload.single('image_url'),
     validationHandler(createEmailSchema),
     async function (req, res, next) {
       const { body: email } = req;
 
       try {
+        // Upload images to the cloud and return the URL
+        if (req.file) {
+          email.image_url = await uploadImage(req.file.path);
+        }
         // Send email
         const emailSended = await emailService.sendEmail(email);
         // Response
