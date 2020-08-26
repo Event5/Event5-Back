@@ -31,13 +31,12 @@ function authApi(app) {
             next(error);
           }
 
-          const { id, username, email, type } = user;
+          const { id, username, email } = user;
 
           const payload = {
             id,
             username,
             email,
-            type,
           };
           // Create json web token with the payload data
           const token = jwt.sign(payload, config.auth_jwt_secret, {
@@ -61,13 +60,20 @@ function authApi(app) {
     const { body: user } = req;
 
     try {
-      // Store user in the DB and return user id
-      const createdUser = await usersService.createUser(user);
-      // Response
-      await res.status(201).json({
-        data: createdUser,
-        message: 'user created',
-      });
+      const userExists = await usersService.getUser(user.email);
+
+      // If user already exists, don't create another one
+      if (!userExists.detail) {
+        next(boom.unauthorized('User already exists'));
+      } else {
+        // Store user in the DB and return user id
+        const createdUser = await usersService.createUser(user);
+        // Response
+        await res.status(201).json({
+          data: createdUser,
+          message: 'user created',
+        });
+      }
     } catch (error) {
       next(error);
     }

@@ -1,7 +1,14 @@
 const express = require('express');
+const passport = require('passport');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 const EventDataService = require('../services/eventData');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createEventDataSchema } = require('../utils/schemas/eventData');
+const adminValidationHandler = require('../utils/middleware/adminValidationHandler');
+const uploadImage = require('../lib/cloudinary');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function eventDataApi(app) {
   const router = express.Router();
@@ -9,17 +16,43 @@ function eventDataApi(app) {
 
   const eventDataService = new EventDataService();
 
+  // Images field names:
+  const uploadedImages = upload.fields([
+    { name: 'logo_url' },
+    { name: 'background_url' },
+    { name: 'event_image_url' },
+  ]);
 
-  // TODO Add Logic for the images
+  // create new event data
   router.post(
     '/new-event-data',
+    passport.authenticate('jwt', { session: false }),
+    adminValidationHandler(),
+    uploadedImages,
     validationHandler(createEventDataSchema),
     async function (req, res, next) {
       const { body: eventData } = req;
 
       try {
+        // Upload images to the cloud and return the URL
+        if (req.files.logo_url) {
+          eventData.logo_url = await uploadImage(req.files.logo_url[0].path);
+        }
+        if (req.files.background_url) {
+          eventData.background_url = await uploadImage(
+            req.files.background_url[0].path
+          );
+        }
+        if (req.files.event_image_url) {
+          eventData.event_image_url = await uploadImage(
+            req.files.event_image_url[0].path
+          );
+        }
+
         // Store event in the DB and return it
-        const createdEventData = await eventDataService.createEventData(eventData);
+        const createdEventData = await eventDataService.createEventData(
+          eventData
+        );
         // Response
         res.status(201).json({
           data: createdEventData,

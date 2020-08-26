@@ -10,12 +10,23 @@ class EmailService {
   }
 
   async sendEmail(email) {
+    // TODO get all the event emails and send the email to all of them
     this.data = {
-      to: 'josephsiul15@gmail.com',
+      to: [
+        'josephsiul15@gmail.com',
+        // 'hectordevx@gmail.com',
+        // 'den.velez@gmail.com',
+        // 'sergio.estrella@utp.edu.co',
+        // 'cristianalbertocortesgutierrez@gmail.com',
+      ],
       from: 'luischg11@hotmail.com',
-      subject: email.subject,
-      text: email.content,
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      templateId: 'd-de38317b628d480084fbfc397b599477',
+      dynamic_template_data: {
+        subject: email.subject,
+        title: email.subject,
+        content: email.content,
+        image_url: email.image_url,
+      },
     };
 
     try {

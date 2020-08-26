@@ -2,6 +2,8 @@ const express = require('express');
 const RegistryService = require('../services/registry');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createRegistrySchema } = require('../utils/schemas/registry');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function registryApi(app) {
   const router = express.Router();

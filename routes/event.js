@@ -1,7 +1,11 @@
 const express = require('express');
+const passport = require('passport');
 const EventService = require('../services/event');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createEventSchema } = require('../utils/schemas/event');
+const adminValidationHandler = require('../utils/middleware/adminValidationHandler');
+// JWT Strategy
+require('../utils/auth/strategies/jwt');
 
 function eventApi(app) {
   const router = express.Router();
@@ -11,9 +15,13 @@ function eventApi(app) {
 
   router.post(
     '/new-event',
+    passport.authenticate('jwt', { session: false }),
+    adminValidationHandler(),
     validationHandler(createEventSchema),
     async function (req, res, next) {
       const { body: event } = req;
+      // Add the current user_id to the event
+      event.user_id = req.user.id;
 
       try {
         // Store event in the DB and return it
