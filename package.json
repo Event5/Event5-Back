@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=app:* nodemon index.js",
-    "start": "NODE_ENV=production node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "Jose Luis Chavez <josephsiul15@gmai.com>",
