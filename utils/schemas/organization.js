@@ -4,6 +4,7 @@ const joi = require('joi');
 const createOrganizationSchema = joi.object({
   name: joi.string().required(),
   url: joi.string().required(),
+  user_id: joi.number(),
 });
 
 module.exports = {

@@ -44,7 +44,9 @@ function authApi(app) {
             expiresIn: '24h',
           });
           // Response
-          return res.status(200).json({ token, user: { id, username, email, type_user } });
+          return res
+            .status(200)
+            .json({ token, user: { id, username, email, type_user } });
         });
       } catch (error) {
         next(error);

@@ -13,6 +13,7 @@ function eventApi(app) {
 
   const eventService = new EventService();
 
+  // TODO finish implementing creating events:
   router.post(
     '/new-event',
     passport.authenticate('jwt', { session: false }),
@@ -20,8 +21,11 @@ function eventApi(app) {
     validationHandler(createEventSchema),
     async function (req, res, next) {
       const { body: event } = req;
+
       // Add the current user_id to the event
-      event.user_id = req.user.id;
+      if (!event.user_id) {
+        event.user_id = req.user.id;
+      }
 
       try {
         // Store event in the DB and return it

@@ -1,11 +1,9 @@
 const bcrypt = require('bcrypt');
 const RemoteStore = require('../lib/remoteStore');
-const config = require('../config/config');
-// const boom = require('@hapi/boom');
 
 class UserService {
   constructor() {
-    this.remoteStore = new RemoteStore(config.url_data);
+    this.remoteStore = new RemoteStore();
     this.table = 'user';
   }
 

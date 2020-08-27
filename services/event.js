@@ -1,13 +1,13 @@
-const { eventMock } = require('../utils/mocks/eventMock');
-const CrudMock = require('../utils/mocks/crud');
+const remoteStore = require('../lib/remoteStore');
 
 class EventService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new remoteStore();
+    this.table = 'event';
   }
 
   async createEvent(event) {
-    const createEvent = await this.crudMock.create(event, eventMock);
+    const createEvent = await this.remoteStore.create(this.table, event);
     return createEvent;
   }
 }

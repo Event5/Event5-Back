@@ -1,13 +1,13 @@
-const { speakerMock } = require('../utils/mocks/speakerMock');
-const CrudMock = require('../utils/mocks/crud');
+const RemoteStore = require('../lib/remoteStore');
 
 class SpeakerService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new RemoteStore();
+    this.table = 'speaker';
   }
 
   async createSpeaker(speaker) {
-    const createdSpeaker = await this.crudMock.create(speaker, speakerMock);
+    const createdSpeaker = await this.remoteStore.create(this.table, speaker);
     return createdSpeaker;
   }
 }

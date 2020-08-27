@@ -1,15 +1,15 @@
-const { associateMock } = require('../utils/mocks/associateMock');
-const CrudMock = require('../utils/mocks/crud');
+const RemoteStore = require('../lib/remoteStore');
 
 class AssociateService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new RemoteStore();
+    this.table = 'associate';
   }
 
   async createAssociate(associate) {
-    const createdAssociate = await this.crudMock.create(
-      associate,
-      associateMock
+    const createdAssociate = await this.remoteStore.create(
+      this.table,
+      associate
     );
     return createdAssociate;
   }

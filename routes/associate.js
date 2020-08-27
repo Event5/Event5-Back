@@ -17,6 +17,7 @@ function associateApi(app) {
 
   const associateService = new AssociateService();
 
+  // TODO finish implementing associate
   router.post(
     '/associate',
     passport.authenticate('jwt', { session: false }),

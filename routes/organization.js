@@ -13,6 +13,7 @@ function organizationApi(app) {
 
   const organizationService = new OrganizationService();
 
+  // Create new Organization
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
@@ -22,7 +23,9 @@ function organizationApi(app) {
       const { body: organization } = req;
 
       // Add the current user_id to the organization
-      organization.user_id = req.user.id;
+      if (!organization.user_id) {
+        organization.user_id = req.user.id;
+      }
 
       try {
         // Store registry in the DB and return it
@@ -39,6 +42,28 @@ function organizationApi(app) {
       }
     }
   );
+
+  // Get organization
+  router.get('/', async function (req, res, next) {
+    const id = req.query.user_id;
+
+    try {
+      // Get Organizations that have the same user_id
+      const organization = await organizationService.getOrganization(id);
+
+      if (organization.detail) {
+        next(organization.detail);
+      } else {
+        // Response
+        res.status(200).json({
+          data: organization,
+          message: 'organization returned successfully',
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
+  });
 }
 
 module.exports = organizationApi;

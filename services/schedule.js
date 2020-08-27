@@ -1,13 +1,13 @@
-const { scheduleMock } = require('../utils/mocks/scheduleMock');
-const CrudMock = require('../utils/mocks/crud');
+const RemoteStore = require('../lib/remoteStore');
 
 class ScheduleService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new RemoteStore();
+    this.table = 'schedule';
   }
 
   async createSchedule(schedule) {
-    const createdSchedule = await this.crudMock.create(schedule, scheduleMock);
+    const createdSchedule = await this.remoteStore.create(this.table, schedule);
     return createdSchedule;
   }
 }

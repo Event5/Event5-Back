@@ -13,6 +13,7 @@ function organizerApi(app) {
 
   const organizerService = new OrganizerService();
 
+  // TODO finish implementing Organizer
   router.post(
     '/organizer',
     passport.authenticate('jwt', { session: false }),

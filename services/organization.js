@@ -1,17 +1,25 @@
-const { organizationMock } = require('../utils/mocks/organizationMock');
-const CrudMock = require('../utils/mocks/crud');
+const RemoteStore = require('../lib/remoteStore');
 
 class OrganizationService {
   constructor() {
-    this.crudMock = new CrudMock();
+    this.remoteStore = new RemoteStore();
+    this.table = 'organization';
   }
 
   async createOrganization(organization) {
-    const createdOrganization = await this.crudMock.create(
-      organization,
-      organizationMock
+
+    const createdOrganization = await this.remoteStore.create(
+      this.table,
+      organization
     );
     return createdOrganization;
+  }
+
+  async getOrganization(id) {
+    const idValues = `?user_id=${id}`;
+    this.table = 'organization-user';
+    const organization = await this.remoteStore.get(this.table, idValues);
+    return organization;
   }
 }
 
