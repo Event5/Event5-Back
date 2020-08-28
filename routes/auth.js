@@ -63,14 +63,15 @@ function authApi(app) {
     const { body: user } = req;
 
     try {
+      // Check if user already exists
       const userExists = await usersService.getUser(user.email);
-
       // If user already exists, don't create another one
       if (!userExists.detail) {
         next(boom.unauthorized('User already exists'));
       } else {
         // Store user in the DB and return user id
         const createdUser = await usersService.createUser(user);
+
         // Response
         await res.status(201).json({
           data: createdUser,

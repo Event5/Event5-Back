@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "NODE_ENV=production node index.js",
-    "test": "mocha --exit",
+    "test": "mocha --recursive --exit",
     "cover": "nyc npm run test",
     "report": "nyc report --reporter=html && open coverage/index.html"
   },
@@ -19,6 +19,8 @@
     "@sendgrid/mail": "^7.2.4",
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cloudinary": "^1.22.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -28,7 +30,8 @@
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "superagent": "^6.0.0"
   },
   "devDependencies": {
     "chalk": "^4.1.0",
@@ -55,8 +58,7 @@
     "include": [
       "routes",
       "services",
-      "lib",
-      "utils"
+      "lib"
     ]
   }
 }

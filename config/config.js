@@ -20,6 +20,11 @@ const config = {
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
   },
+  tests: {
+    token:
+      process.env.TOKEN_TEST ||
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKb3NlIiwiZW1haWwiOiJqb3NlQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4NTc3NzcwLCJleHAiOjE1OTg2NjQxNzB9.hWctN9gvWDgrvSo0teu26j6eF2TalWTafliIZ1phr18',
+  },
 };
 
 module.exports = config;

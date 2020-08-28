@@ -1,6 +1,5 @@
-exports.eventDataMock = [
+const eventDataMock = [
   {
-    id: 1,
     logo_url: 'http://images.com/logo_event',
     background_url: 'http://images.com/background_url',
     title: 'React the Library of the Future',
@@ -9,3 +8,20 @@ exports.eventDataMock = [
     event_id: 1,
   },
 ];
+
+class EventDataServiceMock {
+  constructor() {}
+
+  async getEventData() {
+    return Promise.resolve(eventDataMock);
+  }
+
+  async createEventData() {
+    return Promise.resolve(eventDataMock[0]);
+  }
+}
+
+module.exports = {
+  EventDataServiceMock,
+  eventDataMock,
+};

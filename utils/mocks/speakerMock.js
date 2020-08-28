@@ -1,6 +1,5 @@
-exports.speakerMock = [
+const speakerMock = [
   {
-    id: 1,
     name: 'Ramon',
     biography: 'Ramon is google developer expert',
     role: 'Angular expert',
@@ -9,3 +8,20 @@ exports.speakerMock = [
     schedule_id: 1,
   },
 ];
+
+class SpeakerServiceMock {
+  constructor() {}
+
+  async getSpeaker() {
+    return Promise.resolve(speakerMock);
+  }
+
+  async createSpeaker() {
+    return Promise.resolve(speakerMock[0]);
+  }
+}
+
+module.exports = {
+  SpeakerServiceMock,
+  speakerMock,
+};

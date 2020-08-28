@@ -1,6 +1,5 @@
 const organizationMock = [
   {
-    id: 1,
     name: 'React Mexico',
     url: 'react-mexico',
     user_id: 1,

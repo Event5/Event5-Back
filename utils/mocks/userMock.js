@@ -1,9 +1,8 @@
 const userMock = [
   {
-    id: 1,
-    username: 'Luis',
-    email: 'luis@gmail.com',
-    password: '$2b$05$q9Fu3TgU6locFXjoAPrtt.ueAvfDpi0pHjxi12DKOgk0bf7SrOHMi',
+    username: 'Juan',
+    email: 'juan@gmail.com',
+    password: '123',
     type_user: 'admin',
   },
 ];
@@ -11,12 +10,20 @@ const userMock = [
 class UserServiceMock {
   constructor() {}
 
-  async getUser() {
-    return Promise.resolve(userMock);
+  async getUser(email) {
+    const user = userMock.find((user) => user.email === email);
+    if (!user) {
+      return { detail: 'user not found' };
+    }
+    return user;
   }
 
-  async createUser() {
-    return Promise.resolve(userMock[0]);
+  async createUser(data) {
+    // const newData = Object.assign({ id: userMock.length + 1 }, data);
+
+    userMock.push(data);
+    const speakerCreated = userMock.find((val) => val.email === data.email);
+    return speakerCreated;
   }
 }
 
