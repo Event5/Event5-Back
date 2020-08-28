@@ -10,11 +10,19 @@ const scheduleMock = [
 class ScheduleServiceMock {
   constructor() {}
 
-  async getSchedule() {
+  getSchedule() {
     return Promise.resolve(scheduleMock);
   }
 
-  async createSchedule() {
+  createSchedule() {
+    return Promise.resolve(scheduleMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(scheduleMock[0]);
+  }
+
+  create() {
     return Promise.resolve(scheduleMock[0]);
   }
 }

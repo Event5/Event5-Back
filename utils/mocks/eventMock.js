@@ -12,11 +12,19 @@ const eventMock = [
 class EventServiceMock {
   constructor() {}
 
-  async getEvent() {
+  getEvent() {
     return Promise.resolve(eventMock);
   }
 
-  async createEvent() {
+  createEvent() {
+    return Promise.resolve(eventMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(eventMock[0]);
+  }
+
+  create() {
     return Promise.resolve(eventMock[0]);
   }
 }

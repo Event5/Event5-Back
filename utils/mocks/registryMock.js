@@ -8,11 +8,19 @@ const registryMock = [
 class RegistryServiceMock {
   constructor() {}
 
-  async getRegistry() {
+  getRegistry() {
     return Promise.resolve(registryMock);
   }
 
-  async createRegistry() {
+  createRegistry() {
+    return Promise.resolve(registryMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(registryMock[0]);
+  }
+
+  create() {
     return Promise.resolve(registryMock[0]);
   }
 }

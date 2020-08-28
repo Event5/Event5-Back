@@ -10,16 +10,25 @@ const emailMock = [
 class EmailServiceMock {
   constructor() {}
 
-  async getEmail() {
+  getEmail() {
     return Promise.resolve(emailMock);
   }
 
-  async createEmail() {
+  sendEmail() {
     return Promise.resolve(emailMock[0]);
   }
+
+  get() {
+    return Promise.resolve(emailMock[0]);
+  }
+}
+
+function sendSendGrid() {
+  return Promise.resolve(emailMock[0]);
 }
 
 module.exports = {
   EmailServiceMock,
   emailMock,
+  sendSendGrid,
 };

@@ -24,7 +24,9 @@ function organizerApi(app) {
 
       try {
         // Store organizer in the DB and return it
-        const createdOrganizer = await organizerService.getOrganizer(organizer);
+        const createdOrganizer = await organizerService.createOrganizer(
+          organizer
+        );
         // Response
         res.status(201).json({
           data: createdOrganizer,

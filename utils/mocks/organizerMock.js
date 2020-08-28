@@ -1,6 +1,6 @@
 const organizerMock = [
   {
-    email: 'React Mexico',
+    email: 'moye@gmail.com',
     event_id: 1,
   },
 ];
@@ -8,11 +8,19 @@ const organizerMock = [
 class OrganizerServiceMock {
   constructor() {}
 
-  async getOrganizer() {
+  getOrganizer() {
     return Promise.resolve(organizerMock);
   }
 
-  async createOrganizer() {
+  createOrganizer() {
+    return Promise.resolve(organizerMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(organizerMock[0]);
+  }
+
+  create() {
     return Promise.resolve(organizerMock[0]);
   }
 }

@@ -12,11 +12,19 @@ const eventDataMock = [
 class EventDataServiceMock {
   constructor() {}
 
-  async getEventData() {
+  getEventData() {
     return Promise.resolve(eventDataMock);
   }
 
-  async createEventData() {
+  createEventData() {
+    return Promise.resolve(eventDataMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(eventDataMock[0]);
+  }
+
+  create() {
     return Promise.resolve(eventDataMock[0]);
   }
 }

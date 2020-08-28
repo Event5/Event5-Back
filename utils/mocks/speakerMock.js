@@ -12,11 +12,19 @@ const speakerMock = [
 class SpeakerServiceMock {
   constructor() {}
 
-  async getSpeaker() {
+  getSpeaker() {
     return Promise.resolve(speakerMock);
   }
 
-  async createSpeaker() {
+  createSpeaker() {
+    return Promise.resolve(speakerMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(speakerMock[0]);
+  }
+
+  create() {
     return Promise.resolve(speakerMock[0]);
   }
 }

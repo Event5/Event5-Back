@@ -6,10 +6,10 @@ class OrganizerService {
     this.table = 'organizer';
   }
 
-  async getOrganizer(email) {
+  async createOrganizer(email) {
     // TODO logic to add organizer
-    const getOrganizer = await this.crudMock.create(this.table, email);
-    return getOrganizer;
+    const Organizer = await this.remoteStore.create(this.table, email);
+    return Organizer;
   }
 }
 

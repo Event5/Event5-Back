@@ -11,11 +11,19 @@ const associateMock = [
 class AssociateServiceMock {
   constructor() {}
 
-  async getAssociate() {
+  getAssociate() {
     return Promise.resolve(associateMock);
   }
 
-  async createAssociate() {
+  createAssociate() {
+    return Promise.resolve(associateMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(associateMock[0]);
+  }
+
+  create() {
     return Promise.resolve(associateMock[0]);
   }
 }

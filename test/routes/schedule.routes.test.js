@@ -2,31 +2,34 @@ const assert = require('assert');
 const proxyquire = require('proxyquire');
 const config = require('../../config/config');
 
-const { EventServiceMock, eventMock } = require('../../utils/mocks/eventMock');
+const {
+  ScheduleServiceMock,
+  scheduleMock,
+} = require('../../utils/mocks/scheduleMock');
 const testServer = require('../../utils/testServer');
 
 const token = config.tests.token;
 
-describe('- Event Route', function () {
-  const route = proxyquire('../../routes/event', {
-    '../services/event': EventServiceMock,
+describe('- Schedule Route', function () {
+  const route = proxyquire('../../routes/schedule', {
+    '../services/schedule': ScheduleServiceMock,
   });
 
   const request = testServer(route);
 
   // Test
-  describe('POST /api/event', function () {
-    it('Should create an event', function () {
+  describe('POST /api/schedule', function () {
+    it('Should create an schedule', function () {
       return request
-        .post('/api/event/new-event')
+        .post('/api/event/schedule')
         .set('Authorization', 'bearer ' + token)
-        .send(eventMock[0])
+        .send(scheduleMock[0])
         .set('Accept', 'application/json')
         .expect(201)
         .then((response) => {
           assert.deepEqual(response.body, {
-            data: eventMock[0],
-            message: 'event created',
+            data: scheduleMock[0],
+            message: 'schedule created',
           });
         });
     });

@@ -9,11 +9,19 @@ const organizationMock = [
 class OrganizationServiceMock {
   constructor() {}
 
-  async getOrganization() {
+  getOrganization() {
     return Promise.resolve(organizationMock);
   }
 
-  async createOrganization() {
+  createOrganization() {
+    return Promise.resolve(organizationMock[0]);
+  }
+
+  get() {
+    return Promise.resolve(organizationMock[0]);
+  }
+
+  create() {
     return Promise.resolve(organizationMock[0]);
   }
 }

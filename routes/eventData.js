@@ -32,21 +32,22 @@ function eventDataApi(app) {
     validationHandler(createEventDataSchema),
     async function (req, res, next) {
       const { body: eventData } = req;
-
       try {
         // Upload images to the cloud and return the URL
-        if (req.files.logo_url) {
-          eventData.logo_url = await uploadImage(req.files.logo_url[0].path);
-        }
-        if (req.files.background_url) {
-          eventData.background_url = await uploadImage(
-            req.files.background_url[0].path
-          );
-        }
-        if (req.files.event_image_url) {
-          eventData.event_image_url = await uploadImage(
-            req.files.event_image_url[0].path
-          );
+        if (typeof req.files !== 'undefined') {
+          if (typeof req.files.logo_url !== 'undefined') {
+            eventData.logo_url = await uploadImage(req.files.logo_url[0].path);
+          }
+          if (typeof req.files.background_url !== 'undefined') {
+            eventData.background_url = await uploadImage(
+              req.files.background_url[0].path
+            );
+          }
+          if (typeof req.files.event_image_url !== 'undefined') {
+            eventData.event_image_url = await uploadImage(
+              req.files.event_image_url[0].path
+            );
+          }
         }
 
         // Store event in the DB and return it

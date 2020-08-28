@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node index.js",
     "test": "mocha --recursive --exit",
     "cover": "nyc npm run test",
-    "report": "nyc report --reporter=html && open coverage/index.html"
+    "report": "npm run cover && nyc report --reporter=html && open coverage/index.html"
   },
   "keywords": [],
   "author": "Jose Luis Chavez <josephsiul15@gmai.com>",
