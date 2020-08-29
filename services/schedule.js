@@ -10,6 +10,12 @@ class ScheduleService {
     const createdSchedule = await this.remoteStore.create(this.table, schedule);
     return createdSchedule;
   }
+
+  async updateSchedule(schedule) {
+    this.table = 'schedule-detail';
+    const updatedSchedule = await this.remoteStore.update(this.table, schedule);
+    return updatedSchedule;
+  }
 }
 
 module.exports = ScheduleService;

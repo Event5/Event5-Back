@@ -24,6 +24,12 @@ const config = {
     token:
       process.env.TOKEN_TEST ||
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKb3NlIiwiZW1haWwiOiJqb3NlQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4NTc3NzcwLCJleHAiOjE1OTg2NjQxNzB9.hWctN9gvWDgrvSo0teu26j6eF2TalWTafliIZ1phr18',
+    user: {
+      username: 'peter',
+      email: 'peter@gmail.com',
+      password: '123',
+      type_user: 'admin',
+    },
   },
 };
 

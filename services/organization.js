@@ -14,12 +14,13 @@ class OrganizationService {
     return createdOrganization;
   }
 
-  // async getOrganization(id) {
-  //   const idValues = `?user_id=${id}`;
-  //   this.table = 'organization-user';
-  //   const organization = await this.remoteStore.get(this.table, idValues);
-  //   return organization;
-  // }
+  async updateOrganization(data) {
+    // const idValues = `?user_id=${id}`;
+    this.table = 'organization-detail';
+
+    const organization = await this.remoteStore.update(this.table, data);
+    return organization;
+  }
 }
 
 module.exports = OrganizationService;

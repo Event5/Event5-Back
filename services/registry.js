@@ -1,5 +1,3 @@
-// const { registryMock } = require('../utils/mocks/registryMock');
-// const CrudMock = require('../utils/mocks/crud');
 const RemoteStore = require('../lib/remoteStore');
 
 class RegistryService {

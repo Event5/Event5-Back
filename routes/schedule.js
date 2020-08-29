@@ -35,6 +35,29 @@ function scheduleApi(app) {
       }
     }
   );
+
+  // Update schedule
+  router.put(
+    '/schedule',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(createScheduleSchema),
+    async function (req, res, next) {
+      const data = req.body;
+
+      try {
+        // Update schedule that have the same id
+        const result = await scheduleService.updateSchedule(data);
+
+        // Response
+        res.status(200).json({
+          data: result,
+          message: 'schedule updated successfully',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
 }
 
 module.exports = scheduleApi;

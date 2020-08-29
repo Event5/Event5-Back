@@ -13,7 +13,6 @@ function eventApi(app) {
 
   const eventService = new EventService();
 
-  // TODO finish implementing creating events:
   router.post(
     '/new-event',
     passport.authenticate('jwt', { session: false }),
@@ -34,6 +33,29 @@ function eventApi(app) {
         res.status(201).json({
           data: createdEvent,
           message: 'event created',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
+
+  // Update event
+  router.put(
+    '/new-event',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(createEventSchema),
+    async function (req, res, next) {
+      const data = req.body;
+
+      try {
+        // Update event that have the same id
+        const result = await eventService.updateEvent(data);
+
+        // Response
+        res.status(200).json({
+          data: result,
+          message: 'event updated successfully',
         });
       } catch (error) {
         next(error);

@@ -43,27 +43,28 @@ function organizationApi(app) {
     }
   );
 
-  // Get organization
-  router.get('/', async function (req, res, next) {
-    const id = req.query.user_id;
+  // Update organization
+  router.put(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(createOrganizationSchema),
+    async function (req, res, next) {
+      const data = req.body;
 
-    try {
-      // Get Organizations that have the same user_id
-      const organization = await organizationService.getOrganization(id);
+      try {
+        // Update Organizations that have the same id
+        const organization = await organizationService.updateOrganization(data);
 
-      if (organization.detail) {
-        next(organization.detail);
-      } else {
         // Response
         res.status(200).json({
           data: organization,
-          message: 'organization returned successfully',
+          message: 'organization updated successfully',
         });
+      } catch (error) {
+        next(error);
       }
-    } catch (error) {
-      next(error);
     }
-  });
+  );
 }
 
 module.exports = organizationApi;

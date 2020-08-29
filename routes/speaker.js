@@ -44,6 +44,35 @@ function speakerApi(app) {
       }
     }
   );
+
+  // TODO Finish this because it was wrong
+  // Update speaker
+  router.put(
+    '/speaker',
+    passport.authenticate('jwt', { session: false }),
+    upload.single('photo_url'),
+    validationHandler(createSpeakerSchema),
+    async function (req, res, next) {
+      const { body: speaker } = req;
+
+      try {
+        // Upload images to the cloud and return the URL
+        if (req.file) {
+          speaker.photo_url = await uploadImage(req.file.path);
+        }
+        // Update speaker that have the same id
+        const result = await speakerService.updateSpeaker(speaker);
+
+        // Response
+        res.status(200).json({
+          data: result,
+          message: 'speaker updated successfully',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
 }
 
 module.exports = speakerApi;

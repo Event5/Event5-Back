@@ -46,6 +46,34 @@ function associateApi(app) {
       }
     }
   );
+
+  // Update associate
+  router.put(
+    '/associate',
+    passport.authenticate('jwt', { session: false }),
+    upload.single('logo_url'),
+    validationHandler(createAssociateSchema),
+    async function (req, res, next) {
+      const { body: associate } = req;
+
+      try {
+        // Upload images to the cloud and return the URL
+        if (req.file) {
+          associate.logo_url = await uploadImage(req.file.path);
+        }
+        // Update associate that have the same id
+        const result = await associateService.updateAssociate(associate);
+
+        // Response
+        res.status(200).json({
+          data: result,
+          message: 'associate updated successfully',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
 }
 
 module.exports = associateApi;

@@ -23,6 +23,26 @@ function eventDataApi(app) {
     { name: 'event_image_url' },
   ]);
 
+  async function uploadImages(eventData, req) {
+    // Upload images to the cloud and return the URL
+    if (typeof req.files !== 'undefined') {
+      if (typeof req.files.logo_url !== 'undefined') {
+        eventData.logo_url = await uploadImage(req.files.logo_url[0].path);
+      }
+      if (typeof req.files.background_url !== 'undefined') {
+        eventData.background_url = await uploadImage(
+          req.files.background_url[0].path
+        );
+      }
+      if (typeof req.files.event_image_url !== 'undefined') {
+        eventData.event_image_url = await uploadImage(
+          req.files.event_image_url[0].path
+        );
+      }
+    }
+    return eventData;
+  }
+
   // create new event data
   router.post(
     '/new-event-data',
@@ -31,25 +51,9 @@ function eventDataApi(app) {
     uploadedImages,
     validationHandler(createEventDataSchema),
     async function (req, res, next) {
-      const { body: eventData } = req;
+      const { body: Data } = req;
       try {
-        // Upload images to the cloud and return the URL
-        if (typeof req.files !== 'undefined') {
-          if (typeof req.files.logo_url !== 'undefined') {
-            eventData.logo_url = await uploadImage(req.files.logo_url[0].path);
-          }
-          if (typeof req.files.background_url !== 'undefined') {
-            eventData.background_url = await uploadImage(
-              req.files.background_url[0].path
-            );
-          }
-          if (typeof req.files.event_image_url !== 'undefined') {
-            eventData.event_image_url = await uploadImage(
-              req.files.event_image_url[0].path
-            );
-          }
-        }
-
+        const eventData = await uploadImages(Data, req);
         // Store event in the DB and return it
         const createdEventData = await eventDataService.createEventData(
           eventData
@@ -58,6 +62,30 @@ function eventDataApi(app) {
         res.status(201).json({
           data: createdEventData,
           message: 'event data created',
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
+
+  // Update event data
+  router.put(
+    '/new-event-data',
+    passport.authenticate('jwt', { session: false }),
+    uploadedImages,
+    async function (req, res, next) {
+      const { body: Data } = req;
+
+      try {
+        const eventData = await uploadImages(Data, req);
+        // Update event that have the same id
+        const result = await eventDataService.updateEventData(eventData);
+
+        // Response
+        res.status(200).json({
+          data: result,
+          message: 'event data updated successfully',
         });
       } catch (error) {
         next(error);

@@ -15,15 +15,18 @@ passport.use(
       const usersService = new UserServices();
 
       try {
-        const user = await usersService.getUser(tokenPayload.email);
+        if (config.dev !== 'production' && tokenPayload == config.tests.token) {
+          cb(null, config.test.user);
+        } else {
+          const user = await usersService.getUser(tokenPayload.email);
+          if (!user) {
+            return cb(boom.unauthorized(), false);
+          }
 
-        if (!user) {
-          return cb(boom.unauthorized(), false);
+          delete user.password;
+
+          cb(null, { ...user });
         }
-
-        delete user.password;
-
-        cb(null, { ...user});
       } catch (error) {
         return cb(error);
       }

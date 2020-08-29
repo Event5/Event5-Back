@@ -13,6 +13,15 @@ class AssociateService {
     );
     return createdAssociate;
   }
+
+  async updateAssociate(associate) {
+    this.table = 'associate-detail';
+    const createdAssociate = await this.remoteStore.update(
+      this.table,
+      associate
+    );
+    return createdAssociate;
+  }
 }
 
 module.exports = AssociateService;
