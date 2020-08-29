@@ -9,6 +9,7 @@ const createEventSchema = joi.object({
   template: joi.number().required(),
   users: joi.array().items(joi.number()),
   organization_id: joi.number(),
+  published: joi.bool(),
 });
 
 module.exports = {

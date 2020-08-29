@@ -15,7 +15,7 @@ class GetDataService {
 
   async getOrganizer(id) {
     this.table = 'event-organizer-id';
-    const data = `?user_id=${id}`;
+    const data = `?users=${id}`;
     const organizerData = await this.remoteStore.get(this.table, data);
     return organizerData;
   }

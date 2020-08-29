@@ -71,7 +71,7 @@ function getDataApi(app) {
     }
   );
   router.get('/url_event', async function (req, res, next) {
-    const url_event = req.query.url_event;
+    const url_event = req.query.event_url;
 
     try {
       // Get url_event from the DB

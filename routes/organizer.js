@@ -13,7 +13,7 @@ function organizerApi(app) {
 
   const organizerService = new OrganizerService();
 
-  // TODO finish implementing Organizer
+  // Add new Organizer to a Event
   router.post(
     '/organizer',
     passport.authenticate('jwt', { session: false }),
@@ -23,14 +23,14 @@ function organizerApi(app) {
       const { body: organizer } = req;
 
       try {
-        // Store organizer in the DB and return it
+        // Store the added organizer in the DB and return it
         const createdOrganizer = await organizerService.createOrganizer(
           organizer
         );
         // Response
         res.status(201).json({
           data: createdOrganizer,
-          message: 'organizer created',
+          message: 'organizer added',
         });
       } catch (error) {
         next(error);

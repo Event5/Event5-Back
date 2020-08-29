@@ -6,10 +6,33 @@ class OrganizerService {
     this.table = 'organizer';
   }
 
-  async createOrganizer(email) {
-    // TODO logic to add organizer
-    const Organizer = await this.remoteStore.create(this.table, email);
-    return Organizer;
+  async createOrganizer(organizer) {
+    this.table = 'user';
+    // Get Organizer data
+    const getOrganizer = await this.remoteStore.get(
+      this.table,
+      organizer.email
+    );
+
+    // Change Table
+    this.table = 'event-detail';
+
+    // Find the Event where we are going to add the Organizer
+    const organizerEvent = await this.remoteStore.get(
+      this.table,
+      organizer.event_id
+    );
+
+    // Add Organizer to the Event
+    organizerEvent.users.push(getOrganizer.id);
+
+    // Update Event Information with the new Organizer
+    const organizerUpdated = await this.remoteStore.update(
+      this.table,
+      organizerEvent
+    );
+
+    return organizerUpdated;
   }
 }
 

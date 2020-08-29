@@ -17,7 +17,6 @@ function speakerApi(app) {
 
   const speakerService = new SpeakerService();
 
-  // TODO Finish implementing create speaker
   router.post(
     '/speaker',
     passport.authenticate('jwt', { session: false }),
@@ -45,7 +44,6 @@ function speakerApi(app) {
     }
   );
 
-  // TODO Finish this because it was wrong
   // Update speaker
   router.put(
     '/speaker',

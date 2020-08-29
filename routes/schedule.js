@@ -13,7 +13,6 @@ function scheduleApi(app) {
 
   const scheduleService = new ScheduleService();
 
-  // TODO finish testing schedule
   router.post(
     '/schedule',
     passport.authenticate('jwt', { session: false }),
