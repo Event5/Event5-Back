@@ -76,9 +76,15 @@ function getDataApi(app) {
     try {
       // Get url_event from the DB
       const url_eventResult = await getDataService.getUrlEvent(url_event);
+
+      let response = url_eventResult;
+
+      // Check if the response is an Array
+      if (Array.isArray(url_eventResult)) response = url_eventResult[0];
+
       // Response
       res.status(201).json({
-        data: url_eventResult,
+        data: response,
         message: 'url_event obtained',
       });
     } catch (error) {
