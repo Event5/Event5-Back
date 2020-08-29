@@ -1,14 +1,10 @@
 const express = require('express');
-const passport = require('passport');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const EmailService = require('../services/email');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { createEmailSchema } = require('../utils/schemas/email');
 const uploadImage = require('../lib/cloudinary');
-
-// JWT Strategy
-require('../utils/auth/strategies/jwt');
 
 function emailApi(app) {
   const router = express.Router();
@@ -18,19 +14,25 @@ function emailApi(app) {
 
   router.post(
     '/',
-    passport.authenticate('jwt', { session: false }),
     upload.single('image_url'),
     validationHandler(createEmailSchema),
     async function (req, res, next) {
-      const { body: email } = req;
+      const { body: registry } = req;
 
       try {
         // Upload images to the cloud and return the URL
         if (req.file) {
-          email.image_url = await uploadImage(req.file.path);
+          registry.image_url = await uploadImage(req.file.path);
         }
+        // Get Registered Users of an Event
+        const emails = await emailService.getEmails(registry.event_id);
+
+        if (emails.length <= 0) {
+          next('No users Registered');
+        }
+
         // Send email
-        const emailSended = await emailService.sendEmail(email);
+        const emailSended = await emailService.sendEmail(registry, emails);
         // Response
         res.status(201).json({
           data: emailSended,

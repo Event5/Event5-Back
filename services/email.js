@@ -1,41 +1,41 @@
-// const { registryMock } = require('../utils/mocks/registryMock');
-// const CrudMock = require('../utils/mocks/crud');
-
-// const mailgun = require('../lib/mailgun');
-const sendgrid = require('../lib/sendgrid');
+const sendGrid = require('../lib/sendgrid');
+const RemoteStore = require('../lib/remoteStore');
 
 class EmailService {
   constructor() {
-    this.data = {};
+    this.remoteStore = new RemoteStore();
+    this.table = 'registry-event';
+    this.dataEmail = {};
   }
 
-  async sendEmail(email) {
-    // TODO get all the event emails and send the email to all of them
-    this.data = {
-      to: [
-        'josephsiul15@gmail.com',
-        // 'hectordevx@gmail.com',
-        // 'den.velez@gmail.com',
-        // 'sergio.estrella@utp.edu.co',
-        // 'cristianalbertocortesgutierrez@gmail.com',
-      ],
+  async getEmails(id) {
+    const data = `?event_id=${id}`;
+    const registryResponse = await this.remoteStore.get(this.table, data);
+    const emails = registryResponse.map((a) => a.email);
+
+    return emails;
+  }
+
+  async sendEmail(data, emails) {
+    this.dataEmail = {
+      to: emails,
       from: 'luischg11@hotmail.com',
       templateId: 'd-de38317b628d480084fbfc397b599477',
       dynamic_template_data: {
-        subject: email.subject,
-        title: email.subject,
-        content: email.content,
-        image_url: email.image_url,
+        subject: data.subject,
+        title: data.subject,
+        content: data.content,
+        image_url: data.image_url,
       },
     };
 
     try {
       // Send email with SendGrid
-      const mail = await sendgrid(this.data);
+      const mail = await sendGrid(this.dataEmail);
       if (!mail) {
         throw new Error('Error sending the Email');
       }
-      return email;
+      return data;
     } catch (error) {
       throw new Error(error);
     }
