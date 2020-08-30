@@ -1,3 +1,4 @@
+require('dotenv').config();
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const boom = require('@hapi/boom');
@@ -8,7 +9,7 @@ const config = require('../../../config/config');
 passport.use(
   new Strategy(
     {
-      secretOrKey: config.auth_jwt_secret,
+      secretOrKey: process.env.AUTH_JWT_SECRET,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
     async function (tokenPayload, cb) {
