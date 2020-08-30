@@ -33,5 +33,19 @@ describe('- Schedule Route', function () {
           });
         });
     });
+    it('Should update an schedule', function () {
+      return request
+        .put('/api/event/schedule')
+        .set('Authorization', 'bearer ' + token)
+        .send(scheduleMock[0])
+        .set('Accept', 'application/json')
+        .expect(200)
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: scheduleMock[0],
+            message: 'schedule updated successfully',
+          });
+        });
+    });
   });
 });

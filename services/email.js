@@ -1,5 +1,6 @@
 const sendGrid = require('../lib/sendgrid');
 const RemoteStore = require('../lib/remoteStore');
+const config = require('../config/config');
 
 class EmailService {
   constructor() {
@@ -10,16 +11,19 @@ class EmailService {
 
   async getEmails(id) {
     const data = `?event_id=${id}`;
-    const registryResponse = await this.remoteStore.get(this.table, data);
-    const emails = registryResponse.map((a) => a.email);
+    let registryResponse = await this.remoteStore.get(this.table, data);
 
-    return emails;
+    if (Array.isArray(registryResponse)) {
+      registryResponse = registryResponse.map((a) => a.email);
+    }
+
+    return registryResponse;
   }
 
   async sendEmail(data, emails) {
     this.dataEmail = {
       to: emails,
-      from: 'luischg11@hotmail.com',
+      from: config.sendGrid.email,
       templateId: 'd-de38317b628d480084fbfc397b599477',
       dynamic_template_data: {
         subject: data.subject,

@@ -5,11 +5,10 @@ const config = {
   port: process.env.PORT || 3000,
   cors: process.env.CORS,
   auth_jwt_secret: process.env.AUTH_JWT_SECRET,
-  default_admin_password: process.env.DEFAULT_ADMIN_PASSWORD,
-  default_organizer_password: process.env.DEFAULT_ORGANIZER_PASSWORD,
-  public_api_key_token: process.env.PUBLIC_API_KEY_TOKEN,
-  admin_api_key_token: process.env.ADMIN_API_KEY_TOKEN,
-  sendgrid_api_key: process.env.SENDGRID_API_KEY,
+  sendGrid: {
+    sendgrid_api_key: process.env.SENDGRID_API_KEY,
+    email: process.env.SENDGRID_EMAIL,
+  },
   url_data: process.env.URL_DATA,
   azure_storage: {
     account: process.env.ACCOUNT,
@@ -22,8 +21,7 @@ const config = {
   },
   tests: {
     token:
-      process.env.TOKEN_TEST ||
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKb3NlIiwiZW1haWwiOiJqb3NlQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4NTc3NzcwLCJleHAiOjE1OTg2NjQxNzB9.hWctN9gvWDgrvSo0teu26j6eF2TalWTafliIZ1phr18',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksInVzZXJuYW1lIjoicGV0ZXIiLCJlbWFpbCI6InBldGVyQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4NzMzNzAyLCJleHAiOjE1OTg4MjAxMDJ9.9zkum3OkrHECP5bpcQ5L96SBRdnWM9BBKwyKBeSGyOU',
     user: {
       username: 'peter',
       email: 'peter@gmail.com',

@@ -5,7 +5,7 @@ const createOrganizationSchema = joi.object({
   id: joi.number(),
   name: joi.string().required(),
   url: joi.string().required(),
-  user_id: joi.number(),
+  user_id: joi.number().required(),
 });
 
 module.exports = {

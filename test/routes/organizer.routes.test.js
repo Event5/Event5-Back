@@ -29,7 +29,7 @@ describe('- Organizer Route', function () {
         .then((response) => {
           assert.deepEqual(response.body, {
             data: organizerMock[0],
-            message: 'organizer created',
+            message: 'organizer added',
           });
         });
     });

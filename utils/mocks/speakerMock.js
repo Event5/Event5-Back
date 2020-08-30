@@ -5,7 +5,7 @@ const speakerMock = [
     role: 'Angular expert',
     twitter: '@ramon',
     photo_url: 'http://image.com/photo_ramon',
-    schedule_id: 1,
+    schedule_id: [1],
   },
 ];
 
@@ -20,11 +20,18 @@ class SpeakerServiceMock {
     return Promise.resolve(speakerMock[0]);
   }
 
+  updateSpeaker() {
+    return Promise.resolve(speakerMock[0]);
+  }
+
   get() {
     return Promise.resolve(speakerMock[0]);
   }
 
   create() {
+    return Promise.resolve(speakerMock[0]);
+  }
+  update() {
     return Promise.resolve(speakerMock[0]);
   }
 }

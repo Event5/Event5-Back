@@ -15,7 +15,7 @@ class EventDataService {
   }
 
   async updateEventData(eventData) {
-    this.table = 'event-data-detail'
+    this.table = 'event-data-detail';
     const updatedEventData = await this.remoteStore.update(
       this.table,
       eventData

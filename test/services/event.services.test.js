@@ -16,5 +16,10 @@ describe('Event - services', function () {
       const expected = eventMock[0];
       assert.deepEqual(result, expected);
     });
+    it('should call update method', async function () {
+      const result = await eventService.updateEvent(eventMock[0]);
+      const expected = eventMock[0];
+      assert.deepEqual(result, expected);
+    });
   });
 });

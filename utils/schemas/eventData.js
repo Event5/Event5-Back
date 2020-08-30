@@ -8,7 +8,7 @@ const createEventDataSchema = joi.object({
   title: joi.string().required(),
   description: joi.string(),
   event_image_url: joi.any(),
-  event_id: joi.number(),
+  event_id: joi.number().required(),
 });
 
 module.exports = {

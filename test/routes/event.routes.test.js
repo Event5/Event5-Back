@@ -30,5 +30,19 @@ describe('- Event Route', function () {
           });
         });
     });
+    it('Should update an event', async function () {
+      return await request
+        .put('/api/event/new-event')
+        .set('Authorization', 'bearer ' + token)
+        .send(eventMock[0])
+        .set('Accept', 'application/json')
+        .expect(200)
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: eventMock[0],
+            message: 'event updated successfully',
+          });
+        });
+    });
   });
 });

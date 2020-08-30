@@ -17,11 +17,18 @@ class OrganizationServiceMock {
     return Promise.resolve(organizationMock[0]);
   }
 
+  updateOrganization() {
+    return Promise.resolve(organizationMock[0]);
+  }
+
   get() {
     return Promise.resolve(organizationMock[0]);
   }
 
   create() {
+    return Promise.resolve(organizationMock[0]);
+  }
+  update() {
     return Promise.resolve(organizationMock[0]);
   }
 }

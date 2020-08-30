@@ -20,11 +20,18 @@ class EventDataServiceMock {
     return Promise.resolve(eventDataMock[0]);
   }
 
+  updateEventData() {
+    return Promise.resolve(eventDataMock[0]);
+  }
+
   get() {
     return Promise.resolve(eventDataMock[0]);
   }
 
   create() {
+    return Promise.resolve(eventDataMock[0]);
+  }
+  update() {
     return Promise.resolve(eventDataMock[0]);
   }
 }

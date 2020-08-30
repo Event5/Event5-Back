@@ -33,5 +33,19 @@ describe('- Associate Route', function () {
           });
         });
     });
+    it('Should update an associate', function () {
+      return request
+        .put('/api/event/associate')
+        .set('Authorization', 'bearer ' + token)
+        .send(associateMock[0])
+        .set('Accept', 'application/json')
+        .expect(200)
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: associateMock[0],
+            message: 'associate updated successfully',
+          });
+        });
+    });
   });
 });

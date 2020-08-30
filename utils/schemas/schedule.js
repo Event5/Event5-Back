@@ -7,7 +7,7 @@ const createScheduleSchema = joi.object({
   description: joi.string(),
   speaker: joi.string(),
   date_time: joi.date(),
-  event_id: joi.number(),
+  event_id: joi.number().required(),
 });
 
 module.exports = {

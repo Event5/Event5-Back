@@ -4,7 +4,7 @@ const joi = require('joi');
 const createOrganizerSchema = joi.object({
   id: joi.number(),
   email: joi.string().email({ minDomainSegments: 2 }).required(),
-  event_id: joi.number(),
+  event_id: joi.number().required(),
 });
 
 module.exports = {

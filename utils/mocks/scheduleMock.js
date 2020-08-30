@@ -18,11 +18,18 @@ class ScheduleServiceMock {
     return Promise.resolve(scheduleMock[0]);
   }
 
+  updateSchedule() {
+    return Promise.resolve(scheduleMock[0]);
+  }
+
   get() {
     return Promise.resolve(scheduleMock[0]);
   }
 
   create() {
+    return Promise.resolve(scheduleMock[0]);
+  }
+  update() {
     return Promise.resolve(scheduleMock[0]);
   }
 }

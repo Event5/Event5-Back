@@ -16,11 +16,19 @@ class OrganizerServiceMock {
     return Promise.resolve(organizerMock[0]);
   }
 
+  updateOrganizer() {
+    return Promise.resolve(organizerMock[0]);
+  }
+
   get() {
     return Promise.resolve(organizerMock[0]);
   }
 
   create() {
+    return Promise.resolve(organizerMock[0]);
+  }
+
+  update() {
     return Promise.resolve(organizerMock[0]);
   }
 }

@@ -4,7 +4,7 @@ const associateMock = [
     url: 'https://facebook.com',
     logo_url: 'http://images.com/facebook',
     relevance: true,
-    event_id: 1,
+    event_id: [1],
   },
 ];
 
@@ -19,11 +19,18 @@ class AssociateServiceMock {
     return Promise.resolve(associateMock[0]);
   }
 
+  updateAssociate() {
+    return Promise.resolve(associateMock[0]);
+  }
+
   get() {
     return Promise.resolve(associateMock[0]);
   }
 
   create() {
+    return Promise.resolve(associateMock[0]);
+  }
+  update() {
     return Promise.resolve(associateMock[0]);
   }
 }

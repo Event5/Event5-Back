@@ -22,7 +22,7 @@ function getDataApi(app) {
         // Get admin from the DB
         const adminResult = await getDataService.getAdmin(admin);
         // Response
-        res.status(201).json({
+        res.status(200).json({
           data: adminResult,
           message: 'admin obtained',
         });
@@ -41,7 +41,7 @@ function getDataApi(app) {
         // Get organizer from the DB
         const organizerResult = await getDataService.getOrganizer(organizer);
         // Response
-        res.status(201).json({
+        res.status(200).json({
           data: organizerResult,
           message: 'organizer obtained',
         });
@@ -61,7 +61,7 @@ function getDataApi(app) {
         // Get id_event from the DB
         const id_eventResult = await getDataService.getIdEvent(id_event);
         // Response
-        res.status(201).json({
+        res.status(200).json({
           data: id_eventResult,
           message: 'id_event obtained',
         });
@@ -83,7 +83,7 @@ function getDataApi(app) {
       if (Array.isArray(url_eventResult)) response = url_eventResult[0];
 
       // Response
-      res.status(201).json({
+      res.status(200).json({
         data: response,
         message: 'url_event obtained',
       });

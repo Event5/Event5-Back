@@ -19,5 +19,10 @@ describe('Associate - services', function () {
       const expected = associateMock[0];
       assert.deepEqual(result, expected);
     });
+    it('should call update method', async function () {
+      const result = await associateService.updateAssociate(associateMock[0]);
+      const expected = associateMock[0];
+      assert.deepEqual(result, expected);
+    });
   });
 });

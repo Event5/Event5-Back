@@ -33,5 +33,19 @@ describe('- Speaker Route', function () {
           });
         });
     });
+    it('Should update a speaker', function () {
+      return request
+        .put('/api/event/speaker')
+        .set('Authorization', 'bearer ' + token)
+        .send(speakerMock[0])
+        .set('Accept', 'application/json')
+        .expect(200)
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: speakerMock[0],
+            message: 'speaker updated successfully',
+          });
+        });
+    });
   });
 });

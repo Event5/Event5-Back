@@ -19,5 +19,10 @@ describe('Schedule - services', function () {
       const expected = scheduleMock[0];
       assert.deepEqual(result, expected);
     });
+    it('should call update method', async function () {
+      const result = await scheduleService.updateSchedule(scheduleMock[0]);
+      const expected = scheduleMock[0];
+      assert.deepEqual(result, expected);
+    });
   });
 });

@@ -7,7 +7,7 @@ const createAssociateSchema = joi.object({
   url: joi.string().uri(),
   logo_url: joi.any(),
   relevance: joi.boolean(),
-  event_id: joi.array().items(joi.number()),
+  event_id: joi.array().items(joi.number()).required(),
 });
 
 module.exports = {

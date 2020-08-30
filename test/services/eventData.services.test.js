@@ -19,5 +19,10 @@ describe('EventData - services', function () {
       const expected = eventDataMock[0];
       assert.deepEqual(result, expected);
     });
+    it('should call create method', async function () {
+      const result = await eventDataService.updateEventData(eventDataMock[0]);
+      const expected = eventDataMock[0];
+      assert.deepEqual(result, expected);
+    });
   });
 });

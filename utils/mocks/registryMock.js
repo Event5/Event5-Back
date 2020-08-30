@@ -1,7 +1,7 @@
 const registryMock = [
   {
     email: 'ramon@gmail.com',
-    event_id: 1,
+    event_id: [1],
   },
 ];
 

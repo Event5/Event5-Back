@@ -10,7 +10,7 @@ const emailMock = [
 class EmailServiceMock {
   constructor() {}
 
-  getEmail() {
+  getEmails() {
     return Promise.resolve(emailMock);
   }
 

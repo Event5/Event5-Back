@@ -19,5 +19,10 @@ describe('Organization - services', function () {
       const expected = organizationMock[0];
       assert.deepEqual(result, expected);
     });
+    it('should call update method', async function () {
+      const result = await organizationService.updateOrganization();
+      const expected = organizationMock[0];
+      assert.deepEqual(result, expected);
+    });
   });
 });

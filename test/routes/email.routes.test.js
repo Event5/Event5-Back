@@ -16,7 +16,7 @@ describe('- Email Route', function () {
 
   // Test
   describe('POST /api/email', function () {
-    it('Should create an email', function () {
+    it('Should send an email', function () {
       return request
         .post('/api/email')
         .set('Authorization', 'bearer ' + token)

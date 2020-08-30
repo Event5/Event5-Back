@@ -8,7 +8,7 @@ const createSpeakerSchema = joi.object({
   role: joi.string(),
   twitter: joi.string(),
   photo_url: joi.any(),
-  schedule_id: joi.array().items(joi.number()),
+  schedule_id: joi.array().items(joi.number()).required(),
 });
 
 module.exports = {

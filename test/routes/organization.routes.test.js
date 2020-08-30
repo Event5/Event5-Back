@@ -33,20 +33,18 @@ describe('- Organization Route', function () {
           });
         });
     });
-  });
-
-  describe('GET /api/organization', function () {
-    it('should respond with status 200', function (done) {
-      request
-        .get('/api/organization')
+    it('Should update an organization', function () {
+      return request
+        .put('/api/organization')
+        .set('Authorization', 'bearer ' + token)
+        .send(organizationMock[0])
+        .set('Accept', 'application/json')
         .expect(200)
-        .end((err, res) => {
-          assert.deepEqual(res.body, {
-            data: organizationMock,
-            message: 'organization returned successfully',
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: organizationMock[0],
+            message: 'organization updated successfully',
           });
-
-          done();
         });
     });
   });

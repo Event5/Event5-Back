@@ -31,7 +31,7 @@ function associateApi(app) {
         if (req.file) {
           associate.logo_url = await uploadImage(req.file.path);
         }
-        // Store schedule in the DB and return it
+        // Store associate in the DB and return it
         const createdAssociate = await associateService.createAssociate(
           associate
         );

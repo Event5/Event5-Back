@@ -33,5 +33,28 @@ describe('- Event Data Route', function () {
           });
         });
     });
+    it('Should return 404', function () {
+      return request
+        .post('/api/event/new-event-data')
+        .set('Authorization', 'bearer ' + token)
+        .send(undefined)
+        .set('Accept', 'multipart/form-data')
+        .expect(500);
+    });
+
+    it('Should update an event data', function () {
+      return request
+        .put('/api/event/new-event-data')
+        .set('Authorization', 'bearer ' + token)
+        .send(eventDataMock[0])
+        .set('Accept', 'multipart/form-data')
+        .expect(200)
+        .then((response) => {
+          assert.deepEqual(response.body, {
+            data: eventDataMock[0],
+            message: 'event data updated successfully',
+          });
+        });
+    });
   });
 });

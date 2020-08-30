@@ -24,7 +24,9 @@ class OrganizerService {
     );
 
     // Add Organizer to the Event
-    organizerEvent.users.push(getOrganizer.id);
+    if (Array.isArray(organizerEvent)) {
+      organizerEvent.users.push(getOrganizer.id);
+    }
 
     // Update Event Information with the new Organizer
     const organizerUpdated = await this.remoteStore.update(
