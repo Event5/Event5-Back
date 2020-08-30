@@ -15,16 +15,16 @@ passport.use(
       const usersService = new UserServices();
 
       try {
-        // if (config.dev && tokenPayload.email === 'peter@gmail.com') {
-        //   cb(null, config.tests.user);
-        // } else {
-        const user = await usersService.getUser(tokenPayload.email);
-        if (!user) {
-          return cb(boom.unauthorized(), false);
+        if (config.dev && tokenPayload.email === 'peter@gmail.com') {
+          cb(null, config.tests.user);
+        } else {
+          const user = await usersService.getUser(tokenPayload.email);
+          if (!user) {
+            return cb(boom.unauthorized(), false);
+          }
+          delete user.password;
+          cb(null, { ...user });
         }
-        delete user.password;
-        cb(null, { ...user });
-        // }
       } catch (error) {
         return cb(error);
       }
