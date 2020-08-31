@@ -24,7 +24,10 @@ class OrganizerService {
     );
 
     // Add Organizer to the Event
-    if (Array.isArray(organizerEvent)) {
+    if (
+      Array.isArray(organizerEvent.users) &&
+      organizerEvent.users.length >= 1
+    ) {
       organizerEvent.users.push(getOrganizer.id);
     }
 

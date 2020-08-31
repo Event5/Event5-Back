@@ -6,7 +6,7 @@ const createScheduleSchema = joi.object({
   title: joi.string().min(3).max(100).required(),
   description: joi.string(),
   speaker: joi.string(),
-  date_time: joi.date(),
+  date_time: joi.string(),
   event_id: joi.number().required(),
 });
 

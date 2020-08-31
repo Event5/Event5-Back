@@ -5,7 +5,7 @@ const createEventSchema = joi.object({
   id: joi.number(),
   event_name: joi.string().min(3).max(100).required(),
   url: joi.string().required(),
-  event_start_date: joi.date(),
+  event_start_date: joi.string(),
   template: joi.number().required(),
   users: joi.array().items(joi.number()),
   organization_id: joi.number().required(),
