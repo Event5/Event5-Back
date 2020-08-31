@@ -1,37 +1,29 @@
 const assert = require('assert');
 const proxyquire = require('proxyquire');
 
-const {
-  sendSendGrid,
-  emailMock,
-  EmailServiceMock,
-} = require('../../utils/mocks/emailMock');
+const { emailMock, EmailServiceMock } = require('../../utils/mocks/emailMock');
 
 describe('Email - services', function () {
-  const EmailService = proxyquire('../../services/email', {
-    '../lib/sendgrid': sendSendGrid,
-  });
-
-  const emailService = new EmailService();
-
-  describe('when sending an Email', async function () {
-    it('should call sendEmail method', async function () {
-      const result = await emailService.sendEmail(emailMock[0]);
-      const expected = emailMock[0];
-      assert.deepEqual(result, expected);
-    });
-  });
-
   const Request = proxyquire('../../services/email', {
-    '../lib/remoteStore': EmailServiceMock,
+    '../lib/emailSystem': EmailServiceMock,
   });
 
   const request = new Request();
 
-  describe('when searching for Registry', async function () {
-    it('should call getEmails method', async function () {
-      const result = await request.getEmails(emailMock[0]);
-      const expected = emailMock[0];
+  describe('When Sending Emails', async function () {
+    it('should call sendEmail method', async function () {
+      const result = await request.sendEmail(emailMock[0]);
+      const expected = true;
+      assert.deepEqual(result, expected);
+    });
+    it('should call scheduleEmail method', async function () {
+      const result = await request.scheduleEmail(emailMock[0]);
+      const expected = true;
+      assert.deepEqual(result, expected);
+    });
+    it('should call rescheduleEmail method', async function () {
+      const result = await request.rescheduleEmail(emailMock[0]);
+      const expected = true;
       assert.deepEqual(result, expected);
     });
   });

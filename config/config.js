@@ -21,7 +21,7 @@ const config = {
   },
   tests: {
     token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksInVzZXJuYW1lIjoicGV0ZXIiLCJlbWFpbCI6InBldGVyQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4NzMzNzAyLCJleHAiOjE1OTg4MjAxMDJ9.9zkum3OkrHECP5bpcQ5L96SBRdnWM9BBKwyKBeSGyOU',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksInVzZXJuYW1lIjoicGV0ZXIiLCJlbWFpbCI6InBldGVyQGdtYWlsLmNvbSIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNTk4ODQ2MjM2LCJleHAiOjE1OTg5MzI2MzZ9.3SdCSy98H6y79i04Zlg01oQpHZdlZfOtjrmF0iY8Svk',
     user: {
       username: 'peter',
       email: 'peter@gmail.com',

@@ -21,7 +21,7 @@ class RegistryServiceMock {
   }
 
   create() {
-    return Promise.resolve(registryMock[0]);
+    return true;
   }
 }
 

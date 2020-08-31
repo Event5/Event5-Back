@@ -21,6 +21,12 @@ class EmailServiceMock {
   get() {
     return Promise.resolve(emailMock[0]);
   }
+  scheduleEmail() {
+    return true;
+  }
+  rescheduleEmail() {
+    return true;
+  }
 }
 
 function sendSendGrid() {

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "NODE_ENV=production node index.js",
-    "test:mocha": "mocha --recursive --exit",
+    "test": "mocha --recursive --exit",
     "cover": "nyc npm run test",
     "report": "npm run cover && nyc report --reporter=html && open coverage/index.html"
   },

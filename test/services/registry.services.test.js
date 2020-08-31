@@ -16,7 +16,7 @@ describe('Registry - services', function () {
   describe('when registry is called', async function () {
     it('should call create method', async function () {
       const result = await registryService.createRegistry(registryMock[0]);
-      const expected = registryMock[0];
+      const expected = 'Email already Exists';
       assert.deepEqual(result, expected);
     });
   });

@@ -1,9 +1,7 @@
 const EmailSystem = require('../lib/emailSystem');
-const RemoteStore = require('../lib/remoteStore');
 
 class EmailService {
   constructor() {
-    this.remoteStore = new RemoteStore();
     this.emailSystem = new EmailSystem();
     this.table = 'registry-event';
     this.schedule = {
