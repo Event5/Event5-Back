@@ -3,7 +3,7 @@ const proxyquire = require('proxyquire');
 
 const { emailMock, EmailServiceMock } = require('../../utils/mocks/emailMock');
 
-describe('Email - services', function () {
+describe.skip('Email - services', function () {
   const Request = proxyquire('../../services/email', {
     '../lib/emailSystem': EmailServiceMock,
   });
