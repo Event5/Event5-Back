@@ -7,7 +7,7 @@ const testServer = require('../../utils/testServer');
 
 const token = config.tests.token;
 
-describe('- Email Route', function () {
+describe.skip('- Email Route', function () {
   const route = proxyquire('../../routes/email', {
     '../services/email': EmailServiceMock,
   });
